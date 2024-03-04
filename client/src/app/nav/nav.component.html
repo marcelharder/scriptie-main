@@ -1,0 +1,41 @@
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0)">Scriptie</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="patients" *ngIf="auth.currentUser$ | async">Patients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="statistics" *ngIf="auth.currentUser$ | async">Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about">About</a>
+        </li>
+      </ul>
+
+      <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" required>
+        <input  *ngIf="!(auth.currentUser$ | async)" class="form-control me-2" type="text" placeholder="Username" name="username" [(ngModel)]="model.username" required />
+        <input  *ngIf="!(auth.currentUser$ | async)" class="form-control me-2" type="password" placeholder="Password" name="password" [(ngModel)]="model.password" >
+        <button class="btn btn-success" type="submit" *ngIf="!(auth.currentUser$ | async)">Login</button>
+
+        <label  *ngIf="(auth.currentUser$ | async) as user" style="color:white" class="me-5 mt-2">Welcome, {{user.username}}</label>
+        <button class="btn btn-success" type="button" *ngIf="auth.currentUser$ | async" (click)="logOut()">Logout</button>
+            
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+
+   
+
+

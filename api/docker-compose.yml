@@ -1,0 +1,20 @@
+version: '3.1'
+
+services: 
+
+  scriptie:
+    image: scriptie:v05
+    restart: always
+    ports:
+      - 8048:80
+    networks: 
+     - internal-container-network 
+    volumes:
+      - sqldata:/root/.aspnet/DataProtection-Keys
+
+volumes:
+  sqldata: 
+
+networks:
+  internal-container-network:
+    driver: bridge
